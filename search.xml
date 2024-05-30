@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>初识Markdown</title>
+    <url>/2024/05/30/Markdown-Learning/</url>
+    <content><![CDATA[<h1 id="Marrkdown下载"><a href="#Marrkdown下载" class="headerlink" title="Marrkdown下载"></a>Marrkdown下载</h1><p>选择<a href="http://markdownpad.com/" title="MarkdownPad2下载地址">MarkdownPad2</a>作为我接触md以来的第一款编辑器。</p>
+<p>安装后发现无法正常使用，出现This view has crashed! 那能忍吗？赶紧百度了一下，发现这个问题从Windows8开始就出现了（我的系统是Win11），解决这个问题还需要安装<a href="http://markdownpad.com/download/awesomium_v1.6.6_sdk_win.exe" title="Awesomium 1.6.6 SDK下载地址">Awesomium 1.6.6 SDK</a>，下载安装后就可以正常使用啦！</p>
+<h1 id="md语法学习"><a href="#md语法学习" class="headerlink" title="md语法学习"></a>md语法学习</h1><p>md语法主要通过<a href="https://markdown.com.cn/" title="官方教程网址">Markdown 官方教程</a>学习，这里做一个简要的记录。</p>
+<span id="more"></span>
+<h2 id="标题语法"><a href="#标题语法" class="headerlink" title="标题语法"></a>标题语法</h2><p><code>#</code> + <code>标题内容</code>即可创建标题，<code>#</code>数量代表了标题的级别。</p>
+<h2 id="段落语法"><a href="#段落语法" class="headerlink" title="段落语法"></a>段落语法</h2><p>用空白行将文本分隔即可创建段落。</p>
+<h2 id="换行语法"><a href="#换行语法" class="headerlink" title="换行语法"></a>换行语法</h2><p>在一行的末尾添加两个以上空格，按回车键即可创建一个换行。</p>
+<h2 id="强调语法"><a href="#强调语法" class="headerlink" title="强调语法"></a>强调语法</h2><h3 id="粗体强调"><a href="#粗体强调" class="headerlink" title="粗体强调"></a>粗体强调</h3><p>要加粗文本，请在单词或短语的前后各添加两个星号（asterisks）或下划线（underscores）。如需加粗一个单词或短语的中间部分用以表示强调的话，请在要加粗部分的两侧各添加两个星号（asterisks）。</p>
+<h3 id="斜体强调"><a href="#斜体强调" class="headerlink" title="斜体强调"></a>斜体强调</h3><p>要用斜体显示文本，请在单词或短语前后添加一个星号（asterisk）或下划线（underscore）。要斜体突出单词的中间部分，请在字母前后各添加一个星号，中间不要带空格。</p>
+<h3 id="粗体和斜体强调"><a href="#粗体和斜体强调" class="headerlink" title="粗体和斜体强调"></a>粗体和斜体强调</h3><p>要同时用粗体和斜体突出显示文本，请在单词或短语的前后各添加三个星号或下划线。要加粗并用斜体显示单词或短语的中间部分，请在要突出显示的部分前后各添加三个星号，中间不要带空格。</p>
+<h2 id="引用语法"><a href="#引用语法" class="headerlink" title="引用语法"></a>引用语法</h2><p>要创建块引用，请在段落前添加一个&gt;符号。<br>块引用可以嵌套。在要嵌套的段落前添加一个&gt;&gt;符号。</p>
+<h2 id="代码语法"><a href="#代码语法" class="headerlink" title="代码语法"></a>代码语法</h2><p>要将单词或短语表示为代码，请将其包裹在反引号&#96;中。<br>要创建代码块，请将代码块的每一行缩进至少四个空格或一个制表符。</p>
+<h2 id="分隔线语法"><a href="#分隔线语法" class="headerlink" title="分隔线语法"></a>分隔线语法</h2><p>要创建分隔线，请在单独一行上使用三个或多个星号(***)、破折号(—)或下划线 (___)，并且不能包含其他内容。</p>
+<h2 id="链接语法"><a href="#链接语法" class="headerlink" title="链接语法"></a>链接语法</h2><p>链接文本放在中括号内，链接地址放在后面的括号中，链接title可选。</p>
+<p>超链接Markdown语法代码：<code>[超链接显示名](超链接地址 &quot;超链接title&quot;)</code></p>
+<h2 id="图片语法"><a href="#图片语法" class="headerlink" title="图片语法"></a>图片语法</h2><p>要添加图像，请使用感叹号(!), 然后在方括号增加替代文本，图片链接放在圆括号里，括号里的链接后可以增加一个可选的图片标题文本。</p>
+<p>插入图片Markdown语法代码：<code>![图片alt](图片链接 &quot;图片title&quot;)</code>。</p>
+<p>给图片增加链接，请将图像的Markdown括在方括号中，然后将链接添加在圆括号中。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>My First Blog</title>
+    <url>/2024/05/30/My-First-Blog/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/05/29/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+  </entry>
+</search>
