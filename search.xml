@@ -9,79 +9,48 @@
 <p><code>cd filepath</code></p>
 <p><code>call abaqus job=&#39;jobname&#39; input=&#39;&#39;inputname user=&#39;subroutine&#39; cpus=n int ask=off</code> </p>
 <h1 id="Abaqus内置python实现批量计算"><a href="#Abaqus内置python实现批量计算" class="headerlink" title="Abaqus内置python实现批量计算"></a>Abaqus内置python实现批量计算</h1><pre><code>from abaqusConstants import*
-
 import job
 
 # 使用job-1.inp文件提交job-1的计算任务,numCpus=2设置cpus数，numDomains=2设置线程数
-
 mdb.JobFromInputFile(name=&#39;job-1&#39;,inputFileName=&#39;job-1.inp&#39;,numCpus=2,numDomains=2)
-
 # 提交计算任务
-
 mdb.jobs[&#39;job-1&#39;].submit()
-
 # 中断python文件的执行，等待计算任务的完成。
-
 # 在这里waitForCompletion相当于dos批处理下的参数interactive
-
 mdb.jobs[&#39;job-1&#39;].waitForCompletion()
-
 mdb.JobFromInputFile(name=&#39;job-2&#39;,inputFileName=&#39;job-2.inp&#39;,numCpus=2,numDomains=2)
-
 mdb.jobs[&#39;job-2&#39;].submit()
-
 mdb.jobs[&#39;job-2&#39;].waitForCompletion()
 
 # 导入其他模块
-
 import os,time,sys
-
 # 实现自动关机
-
 o=&quot;c:\windows\system32\shutdown -s -f -t 60&quot;
-
 os.system(o)
 </code></pre>
 <h1 id="python-subprocess模块并行提交计算"><a href="#python-subprocess模块并行提交计算" class="headerlink" title="python subprocess模块并行提交计算"></a>python subprocess模块并行提交计算</h1><pre><code>import subprocess
-
 import time
-
 import os
 
 task_list=[]
-
 for volfrac in [0.1,0.2,0.3,0.4,0.5,0.6]:
-
     for R in [4,5,6]:
-
         for num in range(1,11):
-
             for bc in [&quot;Tension_x&quot;,&quot;Tension_y&quot;,&quot;Shear&quot;]:
-
                 task_list.append([volfrac,R,num,bc])
 
 i=0
-
 for volfrac,R,num,bc in task_list:
-
     file_name=&quot;&#123;&#125;_&#123;&#125;_&#123;&#125;_&#123;&#125;.inp&quot;.format(volfrac,R,num,bc)
-
     job_name=&quot;Job-&#123;&#125;_&#123;&#125;_&#123;&#125;_&#123;&#125;&quot;.format(int(volfrac*100),R,num,bc)
-
     subprocess.Popen(&#39;abaqus job=&#123;&#125; input=&#123;&#125; cpus=2 int ask_delete=OFF&#39;.format(job_name,file_name),shell=True)
-
     print(&quot;&#123;&#125; submitted.&quot;.format(job_name))
-
     i=i+1
 
     if i==10:
-
         i=0
-
         print(&quot;Waiting...&quot;)
-
         time.sleep(180)
-
 print(&quot;Finished&quot;)
 </code></pre>
 ]]></content>
