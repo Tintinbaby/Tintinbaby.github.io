@@ -43,25 +43,45 @@ o=&quot;c:\windows\system32\shutdown -s -f -t 60&quot;
 os.system(o)
 </code></pre>
 <h1 id="python-subprocess模块并行提交计算"><a href="#python-subprocess模块并行提交计算" class="headerlink" title="python subprocess模块并行提交计算"></a>python subprocess模块并行提交计算</h1><pre><code>import subprocess
+
 import time
+
 import os
+
 task_list=[]
+
 for volfrac in [0.1,0.2,0.3,0.4,0.5,0.6]:
+
     for R in [4,5,6]:
+
         for num in range(1,11):
+
             for bc in [&quot;Tension_x&quot;,&quot;Tension_y&quot;,&quot;Shear&quot;]:
+
                 task_list.append([volfrac,R,num,bc])
+
 i=0
+
 for volfrac,R,num,bc in task_list:
+
     file_name=&quot;&#123;&#125;_&#123;&#125;_&#123;&#125;_&#123;&#125;.inp&quot;.format(volfrac,R,num,bc)
-    job_name=&quot;Job-&#123;&#125;_&#123;&#125;_&#123;&#125;_&#123;&#125;&quot;.format(int(volfrac*100),R,num,bc)#
+
+    job_name=&quot;Job-&#123;&#125;_&#123;&#125;_&#123;&#125;_&#123;&#125;&quot;.format(int(volfrac*100),R,num,bc)
+
     subprocess.Popen(&#39;abaqus job=&#123;&#125; input=&#123;&#125; cpus=2 int ask_delete=OFF&#39;.format(job_name,file_name),shell=True)
+
     print(&quot;&#123;&#125; submitted.&quot;.format(job_name))
+
     i=i+1
+
     if i==10:
+
         i=0
+
         print(&quot;Waiting...&quot;)
+
         time.sleep(180)
+
 print(&quot;Finished&quot;)
 </code></pre>
 ]]></content>
@@ -70,6 +90,22 @@ print(&quot;Finished&quot;)
       </categories>
       <tags>
         <tag>FEM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tintin博客起源</title>
+    <url>/2024/05/31/Blog%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>使用Github Pages和Hexo搭建了Tintin的独立博客，</p>
+<span id="more"></span>
+<p>主要参考了<a href="https://www.itbob.cn/article/002/">使用Github Pages和Hexo搭建自己的独立博客</a>。</p>
+<h1 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h1><p>将博客主题更换为偏简约的<code>Next</code>风格，主要参考了<a href="https://blog.csdn.net/as480133937/article/details/100138838">Hexo-Next主题博客个性化配置</a>。</p>
+<h1 id="标签分类问题"><a href="#标签分类问题" class="headerlink" title="标签分类问题"></a>标签分类问题</h1><p>更换主题后发现tags和categories一直打不开，参考<a href="https://blog.csdn.net/Wonz5130/article/details/84666519">解决Hexo搭建博客显示不出分类、标签问题</a>解决问题！</p>
+]]></content>
+      <categories>
+        <category>Hexo</category>
+      </categories>
+      <tags>
+        <tag>syntax</tag>
       </tags>
   </entry>
   <entry>
@@ -90,22 +126,6 @@ print(&quot;Finished&quot;)
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>Hexo</category>
-      </categories>
-      <tags>
-        <tag>syntax</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tintin博客起源</title>
-    <url>/2024/05/31/Blog%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>使用Github Pages和Hexo搭建了Tintin的独立博客，</p>
-<span id="more"></span>
-<p>主要参考了<a href="https://www.itbob.cn/article/002/">使用Github Pages和Hexo搭建自己的独立博客</a>。</p>
-<h1 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h1><p>将博客主题更换为偏简约的<code>Next</code>风格，主要参考了<a href="https://blog.csdn.net/as480133937/article/details/100138838">Hexo-Next主题博客个性化配置</a>。</p>
-<h1 id="标签分类问题"><a href="#标签分类问题" class="headerlink" title="标签分类问题"></a>标签分类问题</h1><p>更换主题后发现tags和categories一直打不开，参考<a href="https://blog.csdn.net/Wonz5130/article/details/84666519">解决Hexo搭建博客显示不出分类、标签问题</a>解决问题！</p>
 ]]></content>
       <categories>
         <category>Hexo</category>
