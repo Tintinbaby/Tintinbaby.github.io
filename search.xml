@@ -62,25 +62,10 @@ print(&quot;Finished&quot;)
       </tags>
   </entry>
   <entry>
-    <title>Tintin博客起源</title>
-    <url>/2024/05/31/Blog%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>使用Github Pages和Hexo搭建了Tintin的独立博客，</p>
-<span id="more"></span>
-<p>主要参考了<a href="https://www.itbob.cn/article/002/">使用Github Pages和Hexo搭建自己的独立博客</a>。</p>
-<h1 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h1><p>将博客主题更换为偏简约的<code>Next</code>风格，主要参考了<a href="https://blog.csdn.net/as480133937/article/details/100138838">Hexo-Next主题博客个性化配置</a>。</p>
-<h1 id="标签分类问题"><a href="#标签分类问题" class="headerlink" title="标签分类问题"></a>标签分类问题</h1><p>更换主题后发现tags和categories一直打不开，参考<a href="https://blog.csdn.net/Wonz5130/article/details/84666519">解决Hexo搭建博客显示不出分类、标签问题</a>解决问题！</p>
-]]></content>
-      <categories>
-        <category>syntax</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Tintin的Git仓库</title>
     <url>/2024/06/04/Git%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h1><p>首先在本地创建ssh key：<br><code>$ ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</code></p>
+    <content><![CDATA[<h1 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h1><span id="more"></span>
+<p>首先在本地创建ssh key：<br><code>$ ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</code></p>
 <p>进入github的setting，选择SSH Keys，Add SSH Key，将生成的Key粘贴进去。</p>
 <p>在git bash下输入<br><code>$ ssh -T git@github.com</code><br>如果是第一次的会提示是否continue，输入yes就会看到：You’ve successfully authenticated, but GitHub does not provide shell access。这就表示已成功连上github。</p>
 <p>设置username和email：<br><code>$ git config --global user.name &quot;your name&quot;</code><br><code>$ git config --global user.email &quot;your_email@youremail.com&quot;</code></p>
@@ -106,6 +91,22 @@ print(&quot;Finished&quot;)
       </categories>
       <tags>
         <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tintin博客起源</title>
+    <url>/2024/05/31/Blog%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><p>使用Github Pages和Hexo搭建了Tintin的独立博客，</p>
+<span id="more"></span>
+<p>主要参考了<a href="https://www.itbob.cn/article/002/">使用Github Pages和Hexo搭建自己的独立博客</a>。</p>
+<h1 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h1><p>将博客主题更换为偏简约的<code>Next</code>风格，主要参考了<a href="https://blog.csdn.net/as480133937/article/details/100138838">Hexo-Next主题博客个性化配置</a>。</p>
+<h1 id="标签分类问题"><a href="#标签分类问题" class="headerlink" title="标签分类问题"></a>标签分类问题</h1><p>更换主题后发现tags和categories一直打不开，参考<a href="https://blog.csdn.net/Wonz5130/article/details/84666519">解决Hexo搭建博客显示不出分类、标签问题</a>解决问题！</p>
+]]></content>
+      <categories>
+        <category>syntax</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
   <entry>
