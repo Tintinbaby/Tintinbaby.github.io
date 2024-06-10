@@ -1,53 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Tintin博客起源</title>
-    <url>/2024/05/31/Blog%E6%90%AD%E5%BB%BA/</url>
-    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><span id="more"></span>
-<p>使用Github Pages和Hexo搭建了Tintin的独立博客，主要参考了<a href="https://www.itbob.cn/article/002/">使用Github Pages和Hexo搭建自己的独立博客</a>。</p>
-<h1 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h1><p>将博客主题更换为偏简约的<code>Next</code>风格，主要参考了<a href="https://blog.csdn.net/as480133937/article/details/100138838">Hexo-Next主题博客个性化配置</a>。</p>
-<h1 id="标签分类问题"><a href="#标签分类问题" class="headerlink" title="标签分类问题"></a>标签分类问题</h1><p>更换主题后发现tags和categories一直打不开，参考<a href="https://blog.csdn.net/Wonz5130/article/details/84666519">解决Hexo搭建博客显示不出分类、标签问题</a>解决问题！</p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Tintin的Git仓库</title>
-    <url>/2024/06/04/Git%E5%91%BD%E4%BB%A4/</url>
-    <content><![CDATA[<h1 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h1><span id="more"></span>
-<p>首先在本地创建ssh key：<br><code>$ ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</code></p>
-<p>进入github的setting，选择SSH Keys，Add SSH Key，将生成的Key粘贴进去。</p>
-<p>在git bash下输入<br><code>$ ssh -T git@github.com</code><br>如果是第一次的会提示是否continue，输入yes就会看到：You’ve successfully authenticated, but GitHub does not provide shell access。这就表示已成功连上github。</p>
-<p>设置username和email：<br><code>$ git config --global user.name &quot;your name&quot;</code><br><code>$ git config --global user.email &quot;your_email@youremail.com&quot;</code></p>
-<h1 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h1><p>使用当前目录作为Git本地仓库：<br><code>git init</code></p>
-<p>使用指定目录作为Git本地仓库:<br><code>git init newrepo</code></p>
-<p>向仓库中添加文件：<br><code>git add filename</code></p>
-<p>将添加到文件真正的提交到仓库中：<br><code>git commit -m &quot;Adding files&quot;</code></p>
-<p>关联本地仓库与github仓库：<br><code>$ git remote add origin &quot;HTTPS&quot;</code><br><code>&quot;HTTPS&quot;</code>是github仓库的HTTPS值。</p>
-<p>将本地仓库推送至服务器：<br><code>git push -u oigin main</code></p>
-<p>查看提交历史：<br><code>git log</code>.</p>
-<p>若仓库事先存在readme文件无法上传，就需要先将其拉回来再上传：<br><code>git pull origin main --allow-unrelated-histories</code></p>
-<h1 id="删除仓库"><a href="#删除仓库" class="headerlink" title="删除仓库"></a>删除仓库</h1><p>删除本地仓库文件：<br><code>git rm filename</code></p>
-<p>删除本地仓库有文件夹：<br><code>git rm -r dirname</code></p>
-<h1 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h1><p>查看本地分支：<br><code>git branch</code></p>
-<p>创建分支：<br><code>git branch name</code></p>
-<p>切换分支：<br><code>git checkout name</code></p>
-<p>合并分支：<br><code>git merge name</code></p>
-<p>删除本地分支：<br><code>git branch -d name</code></p>
-<p>删除远程分支：<br><code>git push origin -delete name</code></p>
-]]></content>
-      <categories>
-        <category>Blog</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>Abaqus批量提交计算</title>
     <url>/2024/05/31/Abaqus%E6%89%B9%E9%87%8F%E8%AE%A1%E7%AE%97/</url>
     <content><![CDATA[<h1 id="添加环境变量"><a href="#添加环境变量" class="headerlink" title="添加环境变量"></a>添加环境变量</h1><span id="more"></span>
@@ -107,6 +60,53 @@ print(&quot;Finished&quot;)
       </tags>
   </entry>
   <entry>
+    <title>Tintin博客起源</title>
+    <url>/2024/05/31/Blog%E6%90%AD%E5%BB%BA/</url>
+    <content><![CDATA[<h1 id="博客搭建"><a href="#博客搭建" class="headerlink" title="博客搭建"></a>博客搭建</h1><span id="more"></span>
+<p>使用Github Pages和Hexo搭建了Tintin的独立博客，主要参考了<a href="https://www.itbob.cn/article/002/">使用Github Pages和Hexo搭建自己的独立博客</a>。</p>
+<h1 id="主题更换"><a href="#主题更换" class="headerlink" title="主题更换"></a>主题更换</h1><p>将博客主题更换为偏简约的<code>Next</code>风格，主要参考了<a href="https://blog.csdn.net/as480133937/article/details/100138838">Hexo-Next主题博客个性化配置</a>。</p>
+<h1 id="标签分类问题"><a href="#标签分类问题" class="headerlink" title="标签分类问题"></a>标签分类问题</h1><p>更换主题后发现tags和categories一直打不开，参考<a href="https://blog.csdn.net/Wonz5130/article/details/84666519">解决Hexo搭建博客显示不出分类、标签问题</a>解决问题！</p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Tintin的Git仓库</title>
+    <url>/2024/06/04/Git%E5%91%BD%E4%BB%A4/</url>
+    <content><![CDATA[<h1 id="配置Git"><a href="#配置Git" class="headerlink" title="配置Git"></a>配置Git</h1><span id="more"></span>
+<p>首先在本地创建ssh key：<br><code>$ ssh-keygen -t rsa -C &quot;your_email@youremail.com&quot;</code></p>
+<p>进入github的setting，选择SSH Keys，Add SSH Key，将生成的Key粘贴进去。</p>
+<p>在git bash下输入<br><code>$ ssh -T git@github.com</code><br>如果是第一次的会提示是否continue，输入yes就会看到：You’ve successfully authenticated, but GitHub does not provide shell access。这就表示已成功连上github。</p>
+<p>设置username和email：<br><code>$ git config --global user.name &quot;your name&quot;</code><br><code>$ git config --global user.email &quot;your_email@youremail.com&quot;</code></p>
+<h1 id="创建仓库"><a href="#创建仓库" class="headerlink" title="创建仓库"></a>创建仓库</h1><p>使用当前目录作为Git本地仓库：<br><code>git init</code></p>
+<p>使用指定目录作为Git本地仓库:<br><code>git init newrepo</code></p>
+<p>向仓库中添加文件：<br><code>git add filename</code></p>
+<p>将添加到文件真正的提交到仓库中：<br><code>git commit -m &quot;Adding files&quot;</code></p>
+<p>关联本地仓库与github仓库：<br><code>$ git remote add origin &quot;HTTPS&quot;</code><br><code>&quot;HTTPS&quot;</code>是github仓库的HTTPS值。</p>
+<p>将本地仓库推送至服务器：<br><code>git push -u oigin main</code></p>
+<p>查看提交历史：<br><code>git log</code>.</p>
+<p>若仓库事先存在readme文件无法上传，就需要先将其拉回来再上传：<br><code>git pull origin main --allow-unrelated-histories</code></p>
+<h1 id="删除仓库"><a href="#删除仓库" class="headerlink" title="删除仓库"></a>删除仓库</h1><p>删除本地仓库文件：<br><code>git rm filename</code></p>
+<p>删除本地仓库有文件夹：<br><code>git rm -r dirname</code></p>
+<h1 id="分支管理"><a href="#分支管理" class="headerlink" title="分支管理"></a>分支管理</h1><p>查看本地分支：<br><code>git branch</code></p>
+<p>创建分支：<br><code>git branch name</code></p>
+<p>切换分支：<br><code>git checkout name</code></p>
+<p>合并分支：<br><code>git merge name</code></p>
+<p>删除本地分支：<br><code>git branch -d name</code></p>
+<p>删除远程分支：<br><code>git push origin -delete name</code></p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>KAN(Kolmogorov-Arnold Network)</title>
     <url>/2024/06/07/KAN/</url>
     <content><![CDATA[<h1 id="MLP的局限性"><a href="#MLP的局限性" class="headerlink" title="MLP的局限性"></a>MLP的局限性</h1><span id="more"></span>
@@ -160,27 +160,6 @@ KAN(X) = (\Phi _{l-1} \circ \Phi _{l-2} \circ \cdots \circ \Phi _1 \circ \Phi _0
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2024/05/29/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<span id="more"></span>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-]]></content>
-      <categories>
-        <category>syntax</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>初识Markdown</title>
     <url>/2024/05/30/%E5%88%9D%E8%AF%86Markdown/</url>
     <content><![CDATA[<h1 id="Markdown下载"><a href="#Markdown下载" class="headerlink" title="Markdown下载"></a>Markdown下载</h1><span id="more"></span>
@@ -215,6 +194,27 @@ KAN(X) = (\Phi _{l-1} \circ \Phi _{l-2} \circ \cdots \circ \Phi _1 \circ \Phi _0
       </categories>
       <tags>
         <tag>Markdown</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/2024/05/29/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<span id="more"></span>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <categories>
+        <category>syntax</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
       </tags>
   </entry>
 </search>
