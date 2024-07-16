@@ -421,8 +421,7 @@ d \lambda_c
 \frac{\partial F_s}{\partial \sigma} [K] d\epsilon\\\\
 \frac{\partial F_c}{\partial \sigma} [K] d\epsilon
 \end{bmatrix}</script><p>具体的算法思路如下：</p>
-<embed src="https://github.com/Tintinbaby/Computational-Mechanics/blob/main/Forward%20Euler%20method/Forward%20Euler%20method.pdf" type="application/pdf" width="100%" height="600px">
-]]></content>
+<embed src="Forward Euler method.pdf" type="application/pdf" width="100%" height="600px">]]></content>
       <categories>
         <category>FEM</category>
       </categories>
