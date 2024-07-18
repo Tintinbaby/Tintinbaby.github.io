@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 7.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico">
+  <link rel="mask-icon" href="/images/favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-minimal.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tintinbaby.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"right","display":"post","padding":18,"offset":12,"onmobile":true},"copycode":{"enable":true,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":true,"scrollpercent":true},"bookmark":{"enable":true,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文为论文颗粒流变破碎与堆石料流变应变计算的阅读笔记。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="颗粒流变破碎与堆石料流变应变计算">
+<meta property="og:url" content="http://tintinbaby.github.io/2024/07/18/FEM-Constitutive%20Model-%E9%A2%97%E7%B2%92%E6%B5%81%E5%8F%98%E7%A0%B4%E7%A2%8E%E4%B8%8E%E5%A0%86%E7%9F%B3%E6%96%99%E6%B5%81%E5%8F%98%E5%BA%94%E5%8F%98%E8%AE%A1%E7%AE%97/index.html">
+<meta property="og:site_name" content="Tintin Happy Everyday">
+<meta property="og:description" content="本文为论文颗粒流变破碎与堆石料流变应变计算的阅读笔记。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-07-18T03:15:12.726Z">
+<meta property="article:modified_time" content="2024-07-18T15:36:26.159Z">
+<meta property="article:author" content="Tintin">
+<meta property="article:tag" content="Constitutive Model">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://tintinbaby.github.io/2024/07/18/FEM-Constitutive%20Model-%E9%A2%97%E7%B2%92%E6%B5%81%E5%8F%98%E7%A0%B4%E7%A2%8E%E4%B8%8E%E5%A0%86%E7%9F%B3%E6%96%99%E6%B5%81%E5%8F%98%E5%BA%94%E5%8F%98%E8%AE%A1%E7%AE%97/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>颗粒流变破碎与堆石料流变应变计算 | Tintin Happy Everyday</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Tintin Happy Everyday</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">9</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">5</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">15</span></a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="reading-progress-bar"></div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+  <a href="https://github.com/Tintinbaby" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tintinbaby.github.io/2024/07/18/FEM-Constitutive%20Model-%E9%A2%97%E7%B2%92%E6%B5%81%E5%8F%98%E7%A0%B4%E7%A2%8E%E4%B8%8E%E5%A0%86%E7%9F%B3%E6%96%99%E6%B5%81%E5%8F%98%E5%BA%94%E5%8F%98%E8%AE%A1%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/girl.jpg">
+      <meta itemprop="name" content="Tintin">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Tintin Happy Everyday">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          颗粒流变破碎与堆石料流变应变计算<a href="https://github.com/user-name/repo-name/tree/branch-name/subdirectory-name_posts/FEM-Constitutive%20Model-%E9%A2%97%E7%B2%92%E6%B5%81%E5%8F%98%E7%A0%B4%E7%A2%8E%E4%B8%8E%E5%A0%86%E7%9F%B3%E6%96%99%E6%B5%81%E5%8F%98%E5%BA%94%E5%8F%98%E8%AE%A1%E7%AE%97.md" class="post-edit-link" title="编辑" rel="noopener" target="_blank"><i class="fa fa-pencil-alt"></i></a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2024-07-18 11:15:12 / 修改时间：23:36:26" itemprop="dateCreated datePublished" datetime="2024-07-18T11:15:12+08:00">2024-07-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/FEM/" itemprop="url" rel="index"><span itemprop="name">FEM</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文为论文<a target="_blank" rel="noopener" href="https://kns.cnki.net/kcms2/article/abstract?v=aKxFI3wG76jru4Mv1FPvrnLgNtt76MBwV_e1HHVBw5nnmEzGecyf1-Hfd2-GKNWzVqpsYR_tKAN4L2vvgQsoLEsYDq37OPKmvFuBlk8g8_dd1qFLkUsIzq2aj3OF_EO53-jUsx_Pn27utrlut1OJOoUEcOGeKxYt&amp;uniplatform=NZKPT&amp;language=CHS">颗粒流变破碎与堆石料流变应变计算</a>的阅读笔记。<br><span id="more"></span></p>
+<h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><p>提出一种计算堆石料流变的简化方法，设想可进行加载速率足够慢的三轴试验，使试样中凡受力大于长期强度的颗粒有时间充分破碎，得到的应力-应变-体变曲线则包含流变应变，与不含流变的常规三轴试验曲线比较，得到流变应变。</p>
+<h2 id="问题提出"><a href="#问题提出" class="headerlink" title="问题提出"></a>问题提出</h2><p>堆石坝的<a target="_blank" rel="noopener" href="https://www.icevirtuallibrary.com/doi/epdf/10.1680/geot.2007.57.3.289">观测资料显示</a>，坝体竣工后发生的流变变形可持续几年、十几年甚至更长。堆石坝运行多年后，变形仍不稳定并持续发展是一种常见现象。流变变形还影响堆石坝施工进度安排。<br>堆石料竣工后发生的流变变形，恶化了防渗面板与心墙的应力变形状态，导致面板发生脱空、裂缝、挤碎及止水破坏，心墙堆石坝则发生坝体表面裂缝、心墙内部水力劈裂等，影响大坝防渗安全，增加运维费用并影响工程效益的发挥。<br>堆石料流变研究目前多采用三轴流变试验方法。<a target="_blank" rel="noopener" href="https://kns.cnki.net/kcms2/article/abstract?v=aKxFI3wG76iHXNpTRqA0Z5QKCgPue2SAqQlaEk0-bPh9ArN-tU7XFuLPtLz9UytZplVNfziO5fFZZ4pPKHtKWZSqepVQBMow3oLOHETyeyvU5EC47U20uS3r3InNdSIM_-dOL2tjdmms0ZG5EjPT_e3C5nctDk6tolrSb9u83k05D0luZEBfaQnqdGmDJEBS&amp;uniplatform=NZKPT&amp;language=CHS">沈珠江</a>基于Merchant模型提出了堆石料流变的三参数模型，给出最终流变量的计算表达式，认为剪切流变仅与应力水平有关，体积流变与围压成正比。<a target="_blank" rel="noopener" href="https://kns.cnki.net/kcms2/article/abstract?v=aKxFI3wG76go0q9tBhGT_iADsvSxojxZpwv8l8NM3gJrBXJ8LSaD7mYTB5hSrjnZ7lsZwF8I_hmXdk4EBKi_1AVA6MuNBeeZO-Nh-KNi3PIB_4ees6F6ItkrRI8PzfPcdyIOELwuleXFuIuTUibMuOMpOqMxAX-ISsyMx4jU5bn5dDr_J-2RHqwO7-7yPB3N&amp;uniplatform=NZKPT&amp;language=CHS">李国英等</a>修正最终体积流变为围压和广义剪应力的函数，流变参数增加至6个。<a target="_blank" rel="noopener" href="http://www.cgejournal.com/cn/article/id/11447">程展林等</a>提出了堆石料流变的九参数模型，认为堆石料流变随时间增长为幂函数关系。<a target="_blank" rel="noopener" href="https://kns.cnki.net/kcms2/article/abstract?v=aKxFI3wG76jETTE3w1JzfYU23NViXNPuLzD08RFUaWzJkw07kBGwNa4DFt1-TWqlHFWwE_3m1LaitYkKUN1JVxjuim2lb0tK1DNf5twWBriG2A49SHTiNt6wteJ4JaK61GiyXh-4_0KL7ZgFObysD0RiesgaI2x8XTswwgQ0AT8MRz8IOCNmYTyB239uNry2&amp;uniplatform=NZKPT&amp;language=CHS">李海芳等</a>建议采用对数函数描述轴向流变的时间过程，采用指数函数描述体积流变的时间过程。<a target="_blank" rel="noopener" href="http://cgejournal.com/cn/article/id/12901">王海俊和殷宗泽</a>发现堆石料的体积流变和剪切流变随时间均呈现双曲线变化规律，提出了双屈服面流变模型。</p>
+<p>但堆石料流变试验中存在三个问题：  </p>
+<ol>
+<li>设备占用时间长。流变试验工况覆盖坝料种类、级配、密度的变化以及满足插值方法要求比较困难。</li>
+<li>稳定竖向荷载与围压。由于试样持续的流变变形，为维持恒定的应力条件，竖向荷载一直处在不断调整的波动状态，也将引起围压调整。</li>
+<li>流变的起算时间。目前对于流变变形的起算时间还没有形成共识，流变试验的前期变形占比很大，流变变形速率衰减很快，流变应变的起算时间直接影响流变应变的量值与衰减规律。</li>
+</ol>
+<h2 id="颗粒破碎与堆石料变形"><a href="#颗粒破碎与堆石料变形" class="headerlink" title="颗粒破碎与堆石料变形"></a>颗粒破碎与堆石料变形</h2><p>堆石料经碾压密实，已经形成紧密的颗粒骨架结构。若只承受体积应力，在工程围压范围内堆石料不发生变形、颗粒亦不破碎。<br>若在低围压承受剪应力，围压不足以约束颗粒间的翻越，在剪应力的作用下颗粒之间相互滑移、翻越及结构调整，进而引起堆石原有结构的丧失。实际工程中几乎见不到坝体表面自然条件发生结构性丧失的情况，说明堆石坝中低围压下剪胀变形占比非常有限。<br>当围压达到一定数值后，堆石料再受剪切作用，堆石料变形则由颗粒破碎引起的颗粒间填充、滑移、错动等造成。这种变形以剪切变形为主，并伴随颗粒破碎引起体积收缩，即“剪缩”，从而出现面板堆石坝浇筑面板前上游堆石料发生的亏坡，浇筑的前期面板发生脱空等现象。因此堆石料变形与颗粒破碎密切相关。已有试验表明，堆石料变形与颗粒破碎具有强对应关系，可以通过颗粒破碎来预测堆石料变形，包括静力瞬时变形、流变、湿化变形、动力变形等。<br>堆石料静力瞬时变形与颗粒受力后的瞬时破碎有关，流变变形则与颗粒的流变破碎有关。堆石颗粒的流变破碎指的是堆石料颗粒受力小于瞬时强度，不会发生瞬时破碎，但大于颗粒长期强度，在颗粒长期受力过程的某个时间点上发生破碎，进而引起堆石体流变变形。</p>
+<h2 id="堆石颗粒的长期强度"><a href="#堆石颗粒的长期强度" class="headerlink" title="堆石颗粒的长期强度"></a>堆石颗粒的长期强度</h2><h3 id="单颗粒蠕变试验确定长期强度"><a href="#单颗粒蠕变试验确定长期强度" class="headerlink" title="单颗粒蠕变试验确定长期强度"></a>单颗粒蠕变试验确定长期强度</h3><p>颗粒长期强度指颗粒长期受力过程中破碎的最低应力。当颗粒受力大于等于瞬时强度时，颗粒会瞬时破碎；当颗粒受力不超过长期强度时，不破碎；当颗粒受力介于长期强度和瞬时强度之间时，颗粒发生蠕变破碎。</p>
+<h3 id="断裂力学方法确定颗粒长期强度"><a href="#断裂力学方法确定颗粒长期强度" class="headerlink" title="断裂力学方法确定颗粒长期强度"></a>断裂力学方法确定颗粒长期强度</h3><p>格林菲斯理论认为，材料内部存在许多细微裂纹，在力的作用下，这些裂隙的周围会产生应力集中现象。材料的破坏从缝端开始，裂隙扩展，最后导致材料完全破坏。</p>
+<h2 id="堆石料流变应变与颗粒长期强度"><a href="#堆石料流变应变与颗粒长期强度" class="headerlink" title="堆石料流变应变与颗粒长期强度"></a>堆石料流变应变与颗粒长期强度</h2><h3 id="堆石料的流变模型"><a href="#堆石料的流变模型" class="headerlink" title="堆石料的流变模型"></a>堆石料的流变模型</h3><p>堆石料的流变模型采用分离变量法将时间项t分离出去，即</p>
+<script type="math/tex; mode=display">
+\epsilon_c(t)=\epsilon_f(1-e^{-\alpha t})</script><p>最终流变分量<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.667ex;" xmlns="http://www.w3.org/2000/svg" width="1.986ex" height="1.642ex" role="img" focusable="false" viewBox="0 -431 877.9 726"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D716" d="M227 -11Q149 -11 95 41T40 174Q40 262 87 322Q121 367 173 396T287 430Q289 431 329 431H367Q382 426 382 411Q382 385 341 385H325H312Q191 385 154 277L150 265H327Q340 256 340 246Q340 228 320 219H138V217Q128 187 128 143Q128 77 160 52T231 26Q258 26 284 36T326 57T343 68Q350 68 354 58T358 39Q358 36 357 35Q354 31 337 21T289 0T227 -11Z"></path></g><g data-mml-node="mi" transform="translate(439,-150) scale(0.707)"><path data-c="1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path></g></g></g></g></svg></mjx-container>可以分为最终体积流变<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.667ex;" xmlns="http://www.w3.org/2000/svg" width="2.762ex" height="1.642ex" role="img" focusable="false" viewBox="0 -431 1220.9 726"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D716" d="M227 -11Q149 -11 95 41T40 174Q40 262 87 322Q121 367 173 396T287 430Q289 431 329 431H367Q382 426 382 411Q382 385 341 385H325H312Q191 385 154 277L150 265H327Q340 256 340 246Q340 228 320 219H138V217Q128 187 128 143Q128 77 160 52T231 26Q258 26 284 36T326 57T343 68Q350 68 354 58T358 39Q358 36 357 35Q354 31 337 21T289 0T227 -11Z"></path></g><g data-mml-node="TeXAtom" transform="translate(439,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D463" d="M173 380Q173 405 154 405Q130 405 104 376T61 287Q60 286 59 284T58 281T56 279T53 278T49 278T41 278H27Q21 284 21 287Q21 294 29 316T53 368T97 419T160 441Q202 441 225 417T249 361Q249 344 246 335Q246 329 231 291T200 202T182 113Q182 86 187 69Q200 26 250 26Q287 26 319 60T369 139T398 222T409 277Q409 300 401 317T383 343T365 361T357 383Q357 405 376 424T417 443Q436 443 451 425T467 367Q467 340 455 284T418 159T347 40T241 -11Q177 -11 139 22Q102 54 102 117Q102 148 110 181T151 298Q173 362 173 380Z"></path></g><g data-mml-node="mi" transform="translate(485,0)"><path data-c="1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path></g></g></g></g></g></svg></mjx-container>和最终剪切流变<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.667ex;" xmlns="http://www.w3.org/2000/svg" width="2.737ex" height="1.642ex" role="img" focusable="false" viewBox="0 -431 1209.5 726"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="msub"><g data-mml-node="mi"><path data-c="1D716" d="M227 -11Q149 -11 95 41T40 174Q40 262 87 322Q121 367 173 396T287 430Q289 431 329 431H367Q382 426 382 411Q382 385 341 385H325H312Q191 385 154 277L150 265H327Q340 256 340 246Q340 228 320 219H138V217Q128 187 128 143Q128 77 160 52T231 26Q258 26 284 36T326 57T343 68Q350 68 354 58T358 39Q358 36 357 35Q354 31 337 21T289 0T227 -11Z"></path></g><g data-mml-node="TeXAtom" transform="translate(439,-150) scale(0.707)" data-mjx-texclass="ORD"><g data-mml-node="mi"><path data-c="1D460" d="M131 289Q131 321 147 354T203 415T300 442Q362 442 390 415T419 355Q419 323 402 308T364 292Q351 292 340 300T328 326Q328 342 337 354T354 372T367 378Q368 378 368 379Q368 382 361 388T336 399T297 405Q249 405 227 379T204 326Q204 301 223 291T278 274T330 259Q396 230 396 163Q396 135 385 107T352 51T289 7T195 -10Q118 -10 86 19T53 87Q53 126 74 143T118 160Q133 160 146 151T160 120Q160 94 142 76T111 58Q109 57 108 57T107 55Q108 52 115 47T146 34T201 27Q237 27 263 38T301 66T318 97T323 122Q323 150 302 164T254 181T195 196T148 231Q131 256 131 289Z"></path></g><g data-mml-node="mi" transform="translate(469,0)"><path data-c="1D453" d="M118 -162Q120 -162 124 -164T135 -167T147 -168Q160 -168 171 -155T187 -126Q197 -99 221 27T267 267T289 382V385H242Q195 385 192 387Q188 390 188 397L195 425Q197 430 203 430T250 431Q298 431 298 432Q298 434 307 482T319 540Q356 705 465 705Q502 703 526 683T550 630Q550 594 529 578T487 561Q443 561 443 603Q443 622 454 636T478 657L487 662Q471 668 457 668Q445 668 434 658T419 630Q412 601 403 552T387 469T380 433Q380 431 435 431Q480 431 487 430T498 424Q499 420 496 407T491 391Q489 386 482 386T428 385H372L349 263Q301 15 282 -47Q255 -132 212 -173Q175 -205 139 -205Q107 -205 81 -186T55 -132Q55 -95 76 -78T118 -61Q162 -61 162 -103Q162 -122 151 -136T127 -157L118 -162Z"></path></g></g></g></g></g></svg></mjx-container>：</p>
+<script type="math/tex; mode=display">
+\epsilon_{vf}=b(\frac{\sigma_3}{P_a})^{m_1}+c(\frac{q}{P_a})^{m_2}\qquad\epsilon_{sf}=d(\frac{S_L}{1-S_L})^{m_3}</script><h3 id="堆石料最终流变应变和颗粒长期强度的关系"><a href="#堆石料最终流变应变和颗粒长期强度的关系" class="headerlink" title="堆石料最终流变应变和颗粒长期强度的关系"></a>堆石料最终流变应变和颗粒长期强度的关系</h3><p>堆石体颗粒有3种受力状态：  </p>
+<ol>
+<li>瞬时强度<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.09ex;" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.312ex" role="img" focusable="false" viewBox="0 -540 778 580"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="3C" d="M694 -11T694 -19T688 -33T678 -40Q671 -40 524 29T234 166L90 235Q83 240 83 250Q83 261 91 266Q664 540 678 540Q681 540 687 534T694 519T687 505Q686 504 417 376L151 250L417 124Q686 -4 687 -5Q694 -11 694 -19Z"></path></g></g></g></svg></mjx-container>受力形成的劈裂应力，颗粒会立即破碎，形成瞬时变形，即通过常规三轴测量得到的变形；</li>
+<li>长期强度<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.09ex;" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.312ex" role="img" focusable="false" viewBox="0 -540 778 580"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="3C" d="M694 -11T694 -19T688 -33T678 -40Q671 -40 524 29T234 166L90 235Q83 240 83 250Q83 261 91 266Q664 540 678 540Q681 540 687 534T694 519T687 505Q686 504 417 376L151 250L417 124Q686 -4 687 -5Q694 -11 694 -19Z"></path></g></g></g></svg></mjx-container>受力形成的劈裂应力<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.09ex;" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.312ex" role="img" focusable="false" viewBox="0 -540 778 580"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="3C" d="M694 -11T694 -19T688 -33T678 -40Q671 -40 524 29T234 166L90 235Q83 240 83 250Q83 261 91 266Q664 540 678 540Q681 540 687 534T694 519T687 505Q686 504 417 376L151 250L417 124Q686 -4 687 -5Q694 -11 694 -19Z"></path></g></g></g></svg></mjx-container>瞬时强度，颗粒会在承受荷载后的某个时刻发生破碎，引起流变变形；</li>
+<li>受力形成的劈裂应力<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.09ex;" xmlns="http://www.w3.org/2000/svg" width="1.76ex" height="1.312ex" role="img" focusable="false" viewBox="0 -540 778 580"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mo"><path data-c="3C" d="M694 -11T694 -19T688 -33T678 -40Q671 -40 524 29T234 166L90 235Q83 240 83 250Q83 261 91 266Q664 540 678 540Q681 540 687 534T694 519T687 505Q686 504 417 376L151 250L417 124Q686 -4 687 -5Q694 -11 694 -19Z"></path></g></g></g></svg></mjx-container>长期强度，颗粒不会发生破碎。</li>
+</ol>
+<h3 id="由常规三轴试验的应力应变曲线推求堆石料流变应变"><a href="#由常规三轴试验的应力应变曲线推求堆石料流变应变" class="headerlink" title="由常规三轴试验的应力应变曲线推求堆石料流变应变"></a>由常规三轴试验的应力应变曲线推求堆石料流变应变</h3><p>加载速率足够慢的三轴试验的全过程应力-应变-体变曲线包含了瞬时变形和流变变形，常规三轴试验的全过程应力-应变-体变曲线只包括瞬时变形。在同一偏应力下，用前者应变减去后者应变即可得到这一围压与偏应力下的最终流变变形。<br>对两个从颗粒岩性到细观组构再到几何尺寸和颗粒级配等各方面完全一致的堆石料试样分别进行常规三轴试验与加载速率足够慢的三轴试验，若两个试样破碎参量相同，即对应颗粒同时破碎或不破碎，则试样内对应颗粒间的接触力满足：</p>
+<script type="math/tex; mode=display">
+f_{st} = S_{\infty}f_{ct}</script><p>则可推导颗粒集合体的等效应力和应变张量间满足：</p>
+<script type="math/tex; mode=display">
+\sigma_{st}=S_{\infty}\sigma_{ct}\qquad\epsilon_{st}=\epsilon_{ct}</script>
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Tintin
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://tintinbaby.github.io/2024/07/18/FEM-Constitutive%20Model-%E9%A2%97%E7%B2%92%E6%B5%81%E5%8F%98%E7%A0%B4%E7%A2%8E%E4%B8%8E%E5%A0%86%E7%9F%B3%E6%96%99%E6%B5%81%E5%8F%98%E5%BA%94%E5%8F%98%E8%AE%A1%E7%AE%97/" title="颗粒流变破碎与堆石料流变应变计算">http://tintinbaby.github.io/2024/07/18/FEM-Constitutive Model-颗粒流变破碎与堆石料流变应变计算/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Constitutive-Model/" rel="tag"><i class="fa fa-tag"></i> Constitutive Model</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/07/15/FEM-Constitutive%20Model-%E5%9F%BA%E4%BA%8E%E5%B9%BF%E4%B9%89%E5%A1%91%E6%80%A7%E7%90%86%E8%AE%BA%E6%A1%86%E6%9E%B6%E7%9A%84%E5%A0%86%E7%9F%B3%E6%96%99%E5%8F%98%E5%BD%A2%E8%AE%A1%E7%AE%97/" rel="prev" title="基于广义塑性理论框架的堆石料变形计算">
+      <i class="fa fa-chevron-left"></i> 基于广义塑性理论框架的堆石料变形计算
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%91%98%E8%A6%81"><span class="nav-number">1.</span> <span class="nav-text">摘要</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8F%90%E5%87%BA"><span class="nav-number">1.1.</span> <span class="nav-text">问题提出</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%97%E7%B2%92%E7%A0%B4%E7%A2%8E%E4%B8%8E%E5%A0%86%E7%9F%B3%E6%96%99%E5%8F%98%E5%BD%A2"><span class="nav-number">1.2.</span> <span class="nav-text">颗粒破碎与堆石料变形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9F%B3%E9%A2%97%E7%B2%92%E7%9A%84%E9%95%BF%E6%9C%9F%E5%BC%BA%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">堆石颗粒的长期强度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E9%A2%97%E7%B2%92%E8%A0%95%E5%8F%98%E8%AF%95%E9%AA%8C%E7%A1%AE%E5%AE%9A%E9%95%BF%E6%9C%9F%E5%BC%BA%E5%BA%A6"><span class="nav-number">1.3.1.</span> <span class="nav-text">单颗粒蠕变试验确定长期强度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%AD%E8%A3%82%E5%8A%9B%E5%AD%A6%E6%96%B9%E6%B3%95%E7%A1%AE%E5%AE%9A%E9%A2%97%E7%B2%92%E9%95%BF%E6%9C%9F%E5%BC%BA%E5%BA%A6"><span class="nav-number">1.3.2.</span> <span class="nav-text">断裂力学方法确定颗粒长期强度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A0%86%E7%9F%B3%E6%96%99%E6%B5%81%E5%8F%98%E5%BA%94%E5%8F%98%E4%B8%8E%E9%A2%97%E7%B2%92%E9%95%BF%E6%9C%9F%E5%BC%BA%E5%BA%A6"><span class="nav-number">1.4.</span> <span class="nav-text">堆石料流变应变与颗粒长期强度</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E7%9F%B3%E6%96%99%E7%9A%84%E6%B5%81%E5%8F%98%E6%A8%A1%E5%9E%8B"><span class="nav-number">1.4.1.</span> <span class="nav-text">堆石料的流变模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A0%86%E7%9F%B3%E6%96%99%E6%9C%80%E7%BB%88%E6%B5%81%E5%8F%98%E5%BA%94%E5%8F%98%E5%92%8C%E9%A2%97%E7%B2%92%E9%95%BF%E6%9C%9F%E5%BC%BA%E5%BA%A6%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">1.4.2.</span> <span class="nav-text">堆石料最终流变应变和颗粒长期强度的关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%B1%E5%B8%B8%E8%A7%84%E4%B8%89%E8%BD%B4%E8%AF%95%E9%AA%8C%E7%9A%84%E5%BA%94%E5%8A%9B%E5%BA%94%E5%8F%98%E6%9B%B2%E7%BA%BF%E6%8E%A8%E6%B1%82%E5%A0%86%E7%9F%B3%E6%96%99%E6%B5%81%E5%8F%98%E5%BA%94%E5%8F%98"><span class="nav-number">1.4.3.</span> <span class="nav-text">由常规三轴试验的应力应变曲线推求堆石料流变应变</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Tintin"
+      src="/images/girl.jpg">
+  <p class="site-author-name" itemprop="name">Tintin</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+        <div class="back-to-top motion-element">
+          <i class="fa fa-arrow-up"></i>
+          <span>0%</span>
+        </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Tintin</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/wanko.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true}});</script></body>
+</html>
